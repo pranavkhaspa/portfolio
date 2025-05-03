@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en" class="antialiased bg-chaos-black">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pranav // REALTIME CHAOS // Digital Alchemist</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+        extend: {
+            fontFamily: {
+            'heading': ['"Syne"', 'ui-sans-serif', 'system-ui'],
+            'body': ['"Inter"', 'ui-sans-serif', 'system-ui'],
+            'mono': ['"Roboto Mono"', 'ui-monospace', 'monospace']
+            },
+            colors: {
+            'chaos-black': '#050505',
+            'chaos-white': '#f0f0f0',
+            'chaos-primary': '#ff00ff',
+            'chaos-secondary': '#00ffff',
+            'chaos-tertiary': '#ffff00',
+            'chaos-dark': '#111111',
+            },
+            animation: {
+                'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'spin-very-slow': 'spin 30s linear infinite',
+                'spin-medium': 'spin 10s linear infinite',
+                'float': 'float 6s ease-in-out infinite',
+            },
+            keyframes: {
+                pulse: { '0%, 100%': { opacity: 1 }, '50%': { opacity: .6 } },
+                float: {
+                '0%, 100%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-20px)' },
+                }
+            }
+        }
+        }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Roboto+Mono:wght@400;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/EaselPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/GSDevTools.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathHelper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MorphSVGPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Observer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Physics2DPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/PhysicsPropsPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/PixiPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/TextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/EasePack.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomBounce.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomWiggle.min.js"></script>
+
+    <!-- <style>
+        body { background-color: #050505; opacity: 0; transition: opacity 0.5s ease-in-out; }
+        body.loaded { opacity: 1; }
+        #preloader { display: flex; }
+        #smooth-wrapper { opacity: 0; transition: opacity 0.5s ease-in-out; }
+        #smooth-wrapper.visible { opacity: 1; }
+        @keyframes scroll-indicator { 0% { transform: translateY(0); opacity: 1; } 50% { transform: translateY(48px); opacity: 1; } 100% { transform: translateY(48px); opacity: 0; } }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+    </style> -->
+    <link rel="stylesheet" href="/output.css">
+</head>
+<body class="font-body text-chaos-white selection:bg-chaos-secondary selection:text-chaos-black">
+    <div id="preloader" class="fixed inset-0 bg-chaos-black z-[100] flex flex-col justify-center items-center space-y-4">
+        <div class="w-16 h-16 border-4 border-chaos-primary border-t-transparent rounded-full animate-spin"></div>
+        <div id="preloader-text" class="text-lg font-heading font-semibold tracking-wider text-chaos-white">INITIATING CHAOS...</div>
+    </div>
+
+    <div id="dynamic-background" class="fixed inset-0 z-[-10] overflow-hidden pointer-events-none">
+        <div id="animated-gradient" class="absolute inset-0 opacity-30"></div>
+    </div>
+
+    <div id="smooth-wrapper" class="invisible">
+        <div id="smooth-content">
+            <section id="hero" class="h-screen min-h-[700px] relative flex flex-col justify-center items-center text-center overflow-hidden p-4 isolate">
+                <video
+                    id="hero-video"
+                    src="/3163534-uhd_3840_2160_30fps.mp4"
+                    autoplay muted loop playsinline
+                    class="absolute inset-0 w-full h-full object-cover z-[-1] opacity-30 mix-blend-luminosity filter grayscale scale-110"
+                    data-speed="0.8"></video>
+                <div class="absolute inset-0 z-[-1] bg-[url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20200%20200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter%20id%3D%22noiseFilter%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.65%22%20numOctaves%3D%223%22%20stitchTiles%3D%22stitch%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url%28%23noiseFilter%29%22%2F%3E%3C%2Fsvg%3E')] opacity-[0.04] pointer-events-none"></div>
+                <div class="relative z-10 flex flex-col items-center">
+                    <h1 id="hero-headline" class="font-heading font-extrabold text-white uppercase text-[clamp(3rem,_13vw,_11rem)] leading-none tracking-tighter max-w-7xl break-all perspective-[800px]" style="visibility: hidden;">
+                        PRANAV<br>
+                        <span class="text-chaos-primary block mt-[-0.1em] hero-line-2">KHASPA</span>
+                    </h1>
+                    <p id="hero-subtitle" class="mt-8 text-lg md:text-xl max-w-2xl text-chaos-white/80 font-light opacity-0 translate-y-4 font-mono">
+                        Aspiring student to become a tech professional in the field of technology. <br> <br>
+                        <span class="text-chaos-secondary">LEARN.CODE.REPEAT</span>
+                    </p>
+                </div>
+                <div class="absolute inset-0 z-[5] overflow-hidden pointer-events-none">
+                    <div class="hero-deco absolute top-[5%] left-[8%] w-3 h-3 bg-chaos-secondary rounded-full opacity-60 filter blur-[1px]" data-speed="1.2" data-lag="0.3"></div>
+                    <div class="hero-deco absolute bottom-[10%] right-[5%] w-4 h-4 border border-chaos-primary rounded-sm opacity-50" data-speed="0.7" data-lag="0.1"></div>
+                    <div class="hero-deco absolute top-[50%] left-[15%] w-2 h-2 bg-chaos-tertiary rounded-full opacity-70" data-speed="1.1" data-lag="0.5"></div>
+                    <div class="hero-deco absolute top-[20%] right-[20%] w-3 h-3 border border-chaos-white/30 rounded-full opacity-40" data-speed="0.9" data-lag="0.2"></div>
+                </div>
+            </section>
+
+            <section id="about" class="py-28 md:py-48 bg-chaos-dark text-chaos-white relative overflow-visible">
+                <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-5 gap-16 lg:gap-20 items-center relative z-10">
+                    <div id="about-image-container" class="lg:col-span-2 h-[60vh] md:h-[70vh] relative overflow-hidden rounded-md shadow-2xl shadow-chaos-secondary/20 perspective-[1000px]">
+                        <img
+                            id="about-image"
+                            src="/dev.jpeg"
+                            alt="Developer coding"
+                            class="absolute inset-0 w-full h-full object-cover scale-[1.3] origin-center filter grayscale-[80%]"
+                        />
+                        <div id="about-image-overlay" class="absolute inset-0 bg-chaos-primary/10 opacity-0 transition-opacity duration-500 flex justify-center items-center">
+                            <span class="text-chaos-black font-heading text-3xl font-bold opacity-0 scale-50">FOCUS</span>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <h2 class="font-heading font-bold text-[clamp(2.5rem,_7vw,_5rem)] leading-tight mb-8 text-chaos-secondary headline-reveal">
+                            About Me
+                        </h2>
+                        <div class="space-y-5 text-lg md:text-xl text-chaos-white/80 font-light font-body">
+                            <p class="paragraph-reveal">
+                                A Second Year Student from <span class="font-medium text-chaos-white">M.V.G.R</span> Self taught Programmer with a passion for Building <span class="font-medium text-chaos-primary italic">Products</span> That Solves  <span class="font-medium text-chaos-secondary italic">Real World Problems.</span>.
+                            </p>
+                            <p class="paragraph-reveal">
+                                currently learning <strong class="text-chaos-white font-medium">React</strong>,Grinding <strong class="text-chaos-white font-medium">Leetcode</strong>, and building skills <strong class="text-chaos-white font-medium"></strong><!--. The browser isn't just a rendering engine; it's a canvas for <span class="font-medium text-chaos-tertiary italic">limitless experimentation</span>. -->
+                            </p>
+                            <p class="paragraph-reveal">
+                                Intrested In: <span id="about-scramble-text" class="text-chaos-secondary font-mono font-medium">Comfy-Ui</span>
+                            </p>
+                        </div>
+                        <a href="#contact" class="mt-10 inline-block text-chaos-primary font-semibold text-lg group relative scroll-to-btn">
+                            <span class="relative z-10">Establish Comms Link →</span>
+                            <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-chaos-primary group-hover:w-full transition-all duration-300"></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="absolute top-[-10%] right-[-15%] w-3/5 h-auto opacity-[0.06] z-0 pointer-events-none" data-speed="1.15">
+                    <svg id="morphing-blob" viewBox="0 0 500 500">
+                        <path id="blob-path-1" fill="currentColor" class="text-chaos-secondary" d="M433,310 C452.1,356.4 413.9,427.9 361.1,455.2 C308.3,482.5 240.9,465.6 187.4,446.9 C133.9,428.2 94.3,407.7 65.9,374.1 C37.5,340.5 20.3,293.8 33.7,250 C47.1,206.2 91.1,165.2 138.9,141.1 C186.7,117 238.3,110 287.5,116.7 C336.7,123.4 383.5,143.8 410.3,181.1 C437.1,218.4 443.9,272.8 433,310 Z" />
+                        <path id="blob-path-2" fill="currentColor" class="text-chaos-secondary" d="M415.5,301 C411.5,353.4 353.8,406.4 297.7,424.8 C241.6,443.2 187.1,427 148.3,399.3 C109.5,371.6 86.4,332.4 76.6,288 C66.8,243.6 70.3,194 95.8,155.5 C121.3,117 168.8,89.6 218.5,83.5 C268.2,77.4 319.1,92.6 357.7,125.1 C396.3,157.6 421.5,207.4 424.4,254.5 C427.3,301.6 419.5,348.6 415.5,301 Z" style="visibility: hidden;"/>
+                        <path id="blob-path-3" fill="currentColor" class="text-chaos-secondary" d="M420,293.5Q398,337,368,355Q338,373,297.5,400Q257,427,209,421Q161,415,116,389.5Q71,364,52,319Q33,274,45.5,230.5Q58,187,99,159Q140,131,187.5,118.5Q235,106,286,93.5Q337,81,377,112Q417,143,429.5,191.5Q442,240,431,290Z" style="visibility: hidden;"/>
+                    </svg>
+                </div>
+                <div id="chaos-orb" class="absolute bottom-[-50px] left-[5%] w-24 h-24 rounded-full bg-gradient-radial from-chaos-primary via-chaos-secondary to-transparent z-20 cursor-grab active:cursor-grabbing flex justify-center items-center text-white text-xs font-mono font-bold shadow-xl shadow-chaos-primary/30">Move  Me</div>
+            </section>
+
+            <section id="projects" class="py-28 md:py-48 bg-chaos-black overflow-hidden relative">
+                <div class="absolute inset-0 z-0 opacity-[0.03] bg-[linear-gradient(to_right,theme(colors.chaos.primary)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.chaos.primary)_1px,transparent_1px)] bg-[size:40px_40px] pattern-animate"></div>
+                <style> .pattern-animate { animation: pattern-scroll 20s linear infinite; } @keyframes pattern-scroll { 100% { background-position: -40px -40px; } } </style>
+                <div class="container mx-auto px-6 mb-16 text-center relative z-10">
+                    <h2 class="font-heading font-bold text-[clamp(2.5rem,_7vw,_5rem)] leading-tight mb-4 text-chaos-secondary headline-reveal">
+                        PROJECTS
+                    </h2>
+                    <p class="text-lg md:text-xl text-chaos-white/70 max-w-3xl mx-auto paragraph-reveal">
+                        Made at hackathons
+                    </p>
+                </div>
+                <div id="project-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 px-6 container mx-auto relative z-10">
+                    <div class="project-item aspect-video lg:aspect-square bg-chaos-dark rounded-md overflow-hidden relative group cursor-pointer border border-chaos-primary/20 hover:border-chaos-primary/80 duration-300 shadow-lg hover:shadow-chaos-primary/30 transform transition-transform hover:-translate-y-2 gsap-project-item" data-flip-id="proj-1">
+                        <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Project 1 Preview" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
+                        <div class="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-400 bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent">
+                            <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out">AI Teaching Bot</h3>
+                            <p class="text-sm text-chaos-primary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out delay-100">Django / Firebase / HuggingFace</p>
+                        </div>
+                        <div class="project-details hidden">
+                            <h3 class="text-4xl font-heading font-bold mb-4 text-chaos-white">AI Teaching Bot: Deep Dive</h3>
+                            <video src="https://videos.pexels.com/video-files/857090/857090-hd_1920_1080_30fps.mp4" autoplay muted loop playsinline class="w-full rounded-lg mb-6 aspect-video object-cover"></video>
+                            <p class="text-lg text-chaos-white/80 mb-4">Developed an intelligent tutoring system using Django for the backend, Firebase for real-time data and authentication, and integrated multiple HuggingFace models for natural language understanding and response generation. Focused on creating adaptive learning paths.</p>
+                            <p class="text-chaos-secondary"><strong>Tech Stack:</strong> Python, Django, Firebase Firestore, Firebase Auth, HuggingFace Transformers, JavaScript, Tailwind CSS.</p>
+                            <a href="#" class="mt-6 inline-block text-chaos-primary border border-chaos-primary px-6 py-2 rounded-full hover:bg-chaos-primary hover:text-chaos-black transition-colors duration-300">Live Demo (Link)</a>
+                        </div>
+                    </div>
+                    <div class="project-item aspect-video lg:aspect-square bg-chaos-dark rounded-md overflow-hidden relative group cursor-pointer border border-chaos-secondary/20 hover:border-chaos-secondary/80 duration-300 shadow-lg hover:shadow-chaos-secondary/30 transform transition-transform hover:-translate-y-2 gsap-project-item" data-flip-id="proj-2">
+                        <img src="https://images.pexels.com/photos/5775854/pexels-photo-5775854.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Project 2 Preview" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
+                        <div class="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-400 bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent">
+                            <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out">GSAP Portfolio V1</h3>
+                            <p class="text-sm text-chaos-secondary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out delay-100">GSAP / ScrollTrigger / Tailwind</p>
+                        </div>
+                        <div class="project-details hidden">
+                            <h3 class="text-4xl font-heading font-bold mb-4 text-chaos-white">GSAP Portfolio V1: Motion Study</h3>
+                            <p class="text-lg text-chaos-white/80 mb-4">An earlier iteration of my personal portfolio, focusing heavily on scroll-driven animations using GSAP's ScrollTrigger plugin. Experimented with parallax effects, text reveals, and SVG animations to create an engaging narrative flow. Built entirely with Tailwind CSS for styling.</p>
+                            <p class="text-chaos-secondary"><strong>Tech Stack:</strong> HTML, CSS, JavaScript, GSAP (Core, ScrollTrigger, SplitText, DrawSVG), Tailwind CSS.</p>
+                            <a href="#" class="mt-6 inline-block text-chaos-primary border border-chaos-primary px-6 py-2 rounded-full hover:bg-chaos-primary hover:text-chaos-black transition-colors duration-300">View Code (Link)</a>
+                        </div>
+                    </div>
+                    <div class="project-item aspect-video lg:aspect-square bg-chaos-dark rounded-md overflow-hidden relative group cursor-pointer border border-chaos-primary/20 hover:border-chaos-primary/80 duration-300 shadow-lg hover:shadow-chaos-primary/30 transform transition-transform hover:-translate-y-2 gsap-project-item" data-flip-id="proj-3">
+                        <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Project 3 Preview" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
+                        <div class="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-400 bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent">
+                            <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out">Kinetic Type</h3>
+                            <p class="text-sm text-chaos-primary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out delay-100">GSAP / SplitText / Variable Fonts</p>
+                        </div>
+                        <div class="project-details hidden">
+                            <h3 class="text-4xl font-heading font-bold mb-4 text-chaos-white">Kinetic Typography</h3>
+                            <video src="https://videos.pexels.com/video-files/7688686/7688686-hd_1920_1080_25fps.mp4" autoplay muted loop playsinline class="w-full rounded-lg mb-6 aspect-video object-cover"></video>
+                            <p class="text-lg text-chaos-white/80 mb-4">A creative coding experiment focused on animating typography using GSAP and variable fonts. Explored techniques like character staggering, morphing text shapes (simulated), and synchronizing text animation to audio cues (conceptual). Utilized SplitText extensively.</p>
+                            <p class="text-chaos-secondary"><strong>Tech Stack:</strong> HTML, CSS, JavaScript, GSAP (Core, SplitText), Variable Fonts.</p>
+                            <a href="#" class="mt-6 inline-block text-chaos-primary border border-chaos-primary px-6 py-2 rounded-full hover:bg-chaos-primary hover:text-chaos-black transition-colors duration-300">Interactive Demo (Link)</a>
+                        </div>
+                    </div>
+                    <div class="project-item aspect-video lg:aspect-square bg-chaos-dark rounded-md overflow-hidden relative group cursor-pointer border border-chaos-secondary/20 hover:border-chaos-secondary/80 duration-300 shadow-lg hover:shadow-chaos-secondary/30 transform transition-transform hover:-translate-y-2 gsap-project-item" data-flip-id="proj-4">
+                        <img src="https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg" alt="Project 4" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
+                        <div class="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-400 bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent">
+                            <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out">Data Visualizer</h3>
+                            <p class="text-sm text-chaos-secondary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out delay-100">D3.js / React / API</p>
+                        </div>
+                        <div class="project-details hidden">
+                            <h3 class="text-4xl font-heading font-bold mb-4 text-chaos-white">Project 4 Title</h3>
+                            <p>Details...</p>
+                        </div>
+                    </div>
+                    <div class="project-item aspect-video lg:aspect-square bg-chaos-dark rounded-md overflow-hidden relative group cursor-pointer border border-chaos-primary/20 hover:border-chaos-primary/80 duration-300 shadow-lg hover:shadow-chaos-primary/30 transform transition-transform hover:-translate-y-2 gsap-project-item" data-flip-id="proj-5">
+                        <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg" alt="Project 5" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
+                        <div class="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-400 bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent">
+                            <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out">Web Audio API Fun</h3>
+                            <p class="text-sm text-chaos-primary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out delay-100">JavaScript / Web Audio</p>
+                        </div>
+                        <div class="project-details hidden">
+                            <h3 class="text-4xl font-heading font-bold mb-4 text-chaos-white">Project 5 Title</h3>
+                            <p>Details...</p>
+                        </div>
+                    </div>
+                    <div class="project-item aspect-video lg:aspect-square bg-chaos-dark rounded-md overflow-hidden relative group cursor-pointer border border-chaos-secondary/20 hover:border-chaos-secondary/80 duration-300 shadow-lg hover:shadow-chaos-secondary/30 transform transition-transform hover:-translate-y-2 gsap-project-item" data-flip-id="proj-6">
+                        <img src="https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg" alt="Project 6" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
+                        <div class="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-400 bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent">
+                            <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out">Serverless Functions</h3>
+                            <p class="text-sm text-chaos-primary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out delay-100"> / AWS Lambda</p>
+                        </div>
+                        <div class="project-details hidden">
+                            <h3 class="text-4xl font-heading font-bold mb-4 text-chaos-white">Project 6 Title</h3>
+                            <p>Details...</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="project-modal" class="fixed inset-0 bg-chaos-black/90 backdrop-blur-lg z-[50] flex justify-center items-center p-6 md:p-16 opacity-0 pointer-events-none visibility-hidden">
+                    <div class="bg-chaos-dark rounded-lg shadow-2xl shadow-chaos-secondary/30 w-full max-w-4xl max-h-[90vh] overflow-y-auto p-8 md:p-12 relative scale-90 transform">
+                        <div id="modal-content"></div>
+                        <button id="close-modal-btn" class="absolute top-4 right-4 text-chaos-white/50 hover:text-chaos-primary text-4xl leading-none font-bold z-10">×</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="skills" class="py-28 md:py-48 bg-gradient-to-b from-chaos-black to-chaos-dark relative">
+                <div class="container mx-auto px-6 text-center relative z-10">
+                    <h2 class="font-heading font-bold text-[clamp(2.5rem,_7vw,_5rem)] leading-tight mb-16 text-chaos-primary headline-reveal">
+                        TECH STACK
+                    </h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 md:gap-16">
+                        <div class="skill-item text-center group perspective-[500px]">
+                            <div class="skill-icon-wrapper w-20 h-20 md:w-24 md:h-24 mx-auto mb-5 relative transition-transform duration-500 ease-out group-hover:[transform:translateZ(20px)_rotateY(15deg)]">
+                                <div class="absolute inset-0 bg-chaos-secondary/10 rounded-full group-hover:bg-chaos-secondary/20 transition-colors duration-300 scale-0 opacity-0"></div>
+                                <svg class="relative z-10 w-full h-full text-chaos-secondary group-hover:text-chaos-tertiary transition-colors duration-300 filter drop-shadow-[0_0_8px_var(--tw-shadow-color)] shadow-chaos-secondary/50 group-hover:shadow-chaos-tertiary/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                    <path class="skill-svg-path" d="M12 1l9.5 5.5v11L12 23l-9.5-5.5v-11L12 1zm0 2.311L4.5 7.653v8.694l7.5 4.342 7.5-4.342V7.653L12 3.311zM12 7l7.5 4.5v1L12 8l-7.5 4.5v-1L12 7z"/>
+                                </svg>
+                            </div>
+                            <h4 class="skill-title text-lg md:text-xl font-semibold font-heading text-chaos-white/90 group-hover:text-chaos-secondary transition-colors duration-300">GSAP</h4>
+                        </div>
+                        <div class="skill-item text-center group perspective-[500px]">
+                            <div class="skill-icon-wrapper w-20 h-20 md:w-24 md:h-24 mx-auto mb-5 relative transition-transform duration-500 ease-out group-hover:[transform:translateZ(20px)_rotateY(-15deg)]">
+                                <div class="absolute inset-0 bg-chaos-primary/10 rounded-full group-hover:bg-chaos-primary/20 transition-colors duration-300 scale-0 opacity-0"></div>
+                                <div class="relative z-10 text-5xl md:text-6xl text-chaos-primary group-hover:text-chaos-tertiary flex justify-center items-center h-full filter drop-shadow-[0_0_8px_var(--tw-shadow-color)] shadow-chaos-primary/50">🚀</div>
+                            </div>
+                            <h4 class="skill-title text-lg md:text-xl font-semibold font-heading text-chaos-white/90 group-hover:text-chaos-primary transition-colors duration-300">Tailwind CSS</h4>
+                        </div>
+                        <div class="skill-item text-center group perspective-[500px]">
+                            <div class="skill-icon-wrapper w-20 h-20 md:w-24 md:h-24 mx-auto mb-5 relative transition-transform duration-500 ease-out group-hover:[transform:translateZ(20px)_rotateY(15deg)]">
+                                <div class="absolute inset-0 bg-chaos-secondary/10 rounded-full group-hover:bg-chaos-secondary/20 transition-colors duration-300 scale-0 opacity-0"></div>
+                                <div class="relative z-10 text-5xl md:text-6xl text-chaos-secondary group-hover:text-chaos-tertiary flex justify-center items-center h-full filter drop-shadow-[0_0_8px_var(--tw-shadow-color)] shadow-chaos-secondary/50">💻</div>
+                            </div>
+                            <h4 class="skill-title text-lg md:text-xl font-semibold font-heading text-chaos-white/90 group-hover:text-chaos-secondary transition-colors duration-300">JavaScript</h4>
+                        </div>
+                        <div class="skill-item text-center group perspective-[500px]">
+                            <div class="skill-icon-wrapper w-20 h-20 md:w-24 md:h-24 mx-auto mb-5 relative transition-transform duration-500 ease-out group-hover:[transform:translateZ(20px)_rotateY(-15deg)]">
+                                <div class="absolute inset-0 bg-chaos-primary/10 rounded-full group-hover:bg-chaos-primary/20 transition-colors duration-300 scale-0 opacity-0"></div>
+                                <div class="relative z-10 text-5xl md:text-6xl text-chaos-primary group-hover:text-chaos-tertiary flex justify-center items-center h-full filter drop-shadow-[0_0_8px_var(--tw-shadow-color)] shadow-chaos-primary/50">🎨</div>
+                            </div>
+                            <h4 class="skill-title text-lg md:text-xl font-semibold font-heading text-chaos-white/90 group-hover:text-chaos-primary transition-colors duration-300">React</h4>
+                        </div>
+                        <div class="skill-item text-center group perspective-[500px]">
+                            <div class="skill-icon-wrapper w-20 h-20 md:w-24 md:h-24 mx-auto mb-5 relative transition-transform duration-500 ease-out group-hover:[transform:translateZ(20px)_rotateY(15deg)]">
+                                <div class="absolute inset-0 bg-chaos-secondary/10 rounded-full group-hover:bg-chaos-secondary/20 transition-colors duration-300 scale-0 opacity-0"></div>
+                                <div class="relative z-10 text-5xl md:text-6xl text-chaos-secondary group-hover:text-chaos-tertiary flex justify-center items-center h-full filter drop-shadow-[0_0_8px_var(--tw-shadow-color)] shadow-chaos-secondary/50">⚙️</div>
+                            </div>
+                            <h4 class="skill-title text-lg md:text-xl font-semibold font-heading text-chaos-white/90 group-hover:text-chaos-secondary transition-colors duration-300">Node.js</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                    <div class="absolute top-[10%] left-[10%] w-16 h-16 border-2 border-chaos-primary/20 rounded-full animate-float animation-delay-[-2s]"></div>
+                    <div class="absolute bottom-[15%] right-[5%] w-12 h-12 border border-chaos-secondary/20 rounded-full animate-float"></div>
+                    <div class="absolute top-[40%] right-[15%] w-8 h-8 bg-chaos-tertiary/10 rounded-full animate-float animation-delay-[-4s]"></div>
+                </div>
+            </section>
+
+            <section id="contact" class="py-28 md:py-48 bg-chaos-dark text-center relative overflow-hidden">
+                <div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
+                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                        <defs>
+                            <pattern id="contact-lines" patternUnits="userSpaceOnUse" width="50" height="50" patternTransform="rotate(45)">
+                                <line x1="0" y="0" x2="0" y2="50" stroke="currentColor" class="text-chaos-primary/50" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#contact-lines)" id="contact-pattern-rect"/>
+                    </svg>
+                </div>
+                <div class="container mx-auto px-6 max-w-3xl relative z-10">
+                    <h2 class="font-heading font-bold text-[clamp(2.5rem,_7vw,_5rem)] leading-tight mb-8 text-chaos-secondary headline-reveal">
+                        CONTACT ME
+                    </h2>
+                    <p class="text-lg md:text-xl text-chaos-white/70 mb-12 paragraph-reveal">
+                        My comms channels are open. Send coordinates, project specs, or existential queries.
+                    </p>
+                    <form id="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" class="space-y-8">
+                        <div class="relative input-reveal">
+                            <input type="text" name="name" placeholder=" " required id="contact-name" class="peer block w-full p-4 pt-6 bg-chaos-dark border border-chaos-primary/40 rounded focus:border-chaos-primary focus:ring-1 focus:ring-chaos-primary/60 outline-none text-chaos-white placeholder-transparent transition-colors duration-300 appearance-none"/>
+                            <label for="contact-name" class="absolute text-sm text-chaos-white/50 duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:text-chaos-primary">Name</label>
+                        </div>
+                        <div class="relative input-reveal">
+                            <input type="email" name="email" placeholder=" " required id="contact-email" class="peer block w-full p-4 pt-6 bg-chaos-dark border border-chaos-primary/40 rounded focus:border-chaos-primary focus:ring-1 focus:ring-chaos-primary/60 outline-none text-chaos-white placeholder-transparent transition-colors duration-300 appearance-none"/>
+                            <label for="contact-email" class="absolute text-sm text-chaos-white/50 duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:text-chaos-primary">Email</label>
+                        </div>
+                        <div class="relative input-reveal">
+                            <textarea name="message" placeholder=" " rows="6" required id="contact-message" class="peer block w-full p-4 pt-6 bg-chaos-dark border border-chaos-primary/40 rounded focus:border-chaos-primary focus:ring-1 focus:ring-chaos-primary/60 outline-none text-chaos-white placeholder-transparent transition-colors duration-300 resize-none"></textarea>
+                            <label for="contact-message" class="absolute text-sm text-chaos-white/50 duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:text-chaos-primary">Message</label>
+                        </div>
+                        <div class="input-reveal">
+                            <button type="submit" class="px-12 py-4 bg-chaos-primary text-chaos-black font-heading font-bold text-xl rounded-lg hover:bg-chaos-secondary hover:text-chaos-black hover:scale-[1.03] focus:outline-none focus:ring-4 focus:ring-chaos-secondary/50 transition-all duration-300 transform active:scale-[0.98]">
+                                <span class="button-text">Engage Transmission</span>
+                                <span class="button-hover-text hidden">Processing...</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <footer id="footer" class="relative bg-chaos-black pt-32 pb-16 md:pt-48 md:pb-24 text-center overflow-hidden border-t-2 border-chaos-primary/20 isolate">
+                <div class="absolute inset-0 z-[-3] opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-chaos-secondary/30 via-transparent to-transparent" data-speed="1.1"></div>
+                <div class="absolute inset-x-0 bottom-0 h-1/2 z-[-2] opacity-40 bg-gradient-to-t from-chaos-dark to-transparent" data-speed="0.9"></div>
+                <div class="relative z-10 container mx-auto px-6">
+                    <div class="footer-text-container overflow-hidden mb-16 md:mb-24">
+                        <h3 id="footer-cta-text" class="font-heading font-extrabold text-[clamp(2.5rem,_10vw,_8rem)] leading-none uppercase text-chaos-white/80 whitespace-nowrap">
+                            Let's Build Strange Things  —  Let's Build Strange Things  —
+                        </h3>
+                    </div>
+                    <div class="flex justify-center space-x-6 md:space-x-10 mb-12 md:mb-16 footer-links">
+                        <a href="https://www.linkedin.com/in/pranavkhaspa/" class="text-chaos-white/60 hover:text-chaos-primary transition-colors duration-300 transform hover:scale-110 text-sm md:text-base font-mono" data-text="LinkedIn">LinkedIn</a>
+                        <a href="https://github.com/pranavkhaspa" class="text-chaos-white/60 hover:text-chaos-secondary transition-colors duration-300 transform hover:scale-110 text-sm md:text-base font-mono" data-text="GitHub">GitHub</a>
+                        <a href="" class="text-chaos-white/60 hover:text-chaos-tertiary transition-colors duration-300 transform hover:scale-110 text-sm md:text-base font-mono" data-text="Twitter">Twitter</a>
+                        <a href="mailto:" class="text-chaos-white/60 hover:text-chaos-primary transition-colors duration-300 transform hover:scale-110 text-sm md:text-base font-mono" data-text="Email">Email</a>
+                    </div>
+                    <p class="text-xs md:text-sm text-chaos-white/40 font-mono footer-credits">
+                        © <span id="current-year"></span> PRANAV :: INDIA :: All rights reserved in this sector.
+                    </p>
+                    <p class="text-xs text-chaos-white/30 mt-2 footer-credits" data-delay="0.1">Fueled by caffeine and curiosity.</p>
+                </div>
+                <div id="footer-orb" class="absolute bottom-[-80px] left-1/2 -translate-x-1/2 w-40 h-40 rounded-full bg-gradient-radial from-chaos-primary/50 via-chaos-secondary/30 to-transparent z-0 opacity-50 filter blur-xl animate-pulse-fast"></div>
+            </footer>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("DOM Ready. System Check: ONLINE.");
+
+            gsap.registerPlugin(
+                Draggable, DrawSVGPlugin, Flip, MotionPathPlugin, MorphSVGPlugin, Observer,
+                ScrambleTextPlugin, ScrollTrigger, ScrollSmoother, ScrollToPlugin, SplitText, TextPlugin
+            );
+            gsap.defaults({ duration: 0.8, ease: "power2.out" });
+
+            let isPreloading = true;
+            let smoother;
+
+            function initPreloader() {
+                const preloader = document.getElementById('preloader');
+                const preloaderText = document.getElementById('preloader-text');
+                const smoothWrapper = document.getElementById('smooth-wrapper');
+
+                gsap.from(preloaderText, { opacity: 0, y: 10, duration: 0.5, delay: 0.2 });
+
+                let loaded = false;
+                window.onload = () => {
+                    if (loaded) return;
+                    loaded = true;
+                    console.log("Window loaded. Ending preload sequence.");
+                    gsap.timeline({
+                        onComplete: () => {
+                            preloader.style.display = 'none';
+                            isPreloading = false;
+                            document.body.classList.add('loaded');
+                            document.body.style.cursor = '';
+                            gsap.to(smoothWrapper, { opacity: 1, duration: 0.6});
+                            smoothWrapper.classList.remove('invisible');
+                            initScrollDependentAnims();
+                        }
+                    })
+                    .to(preloader.children, { opacity: 0, stagger: 0.1, duration: 0.4, ease: "power1.in" }, 0)
+                    .to(preloader, { opacity: 0, duration: 0.6, ease: "power2.inOut" }, 0.3);
+                };
+
+                setTimeout(() => {
+                    if (loaded) return;
+                    console.warn("Preload fallback triggered.");
+                    window.onload();
+                }, 7000);
+                document.body.style.cursor = 'wait';
+            }
+            initPreloader();
+
+            function initScrollDependentAnims() {
+                if (isPreloading) return;
+                console.log("Core Systems Online. Initializing ScrollSmoother & Triggers.");
+
+                smoother = ScrollSmoother.create({
+                    wrapper: "#smooth-wrapper",
+                    content: "#smooth-content",
+                    smooth: 1.6,
+                    effects: true,
+                    smoothTouch: 0.1,
+                });
+
+                initHeroAnims();
+                initAboutAnims();
+                initProjectAnims();
+                initSkillsAnims();
+                initContactAnims();
+                initFooterAnims();
+                initGlobalScrollTriggers();
+                initMouseInteractions();
+                initDynamicBackground();
+
+                setTimeout(() => {
+                    console.log("Final ScrollTrigger Refresh.");
+                    ScrollTrigger.refresh();
+                }, 200);
+            }
+
+            function initHeroAnims() {
+                console.log("Activating Hero Systems.");
+                const headline = document.getElementById('hero-headline');
+                const subtitle = document.getElementById('hero-subtitle');
+                const heroDecos = gsap.utils.toArray('.hero-deco');
+                const heroVideo = document.getElementById('hero-video');
+
+                if (headline) {
+                    const split = new SplitText(headline, { type: "chars, lines", linesClass: "hero-line", charsClass: "hero-char" });
+                    gsap.set(headline, { visibility: 'visible' });
+
+                    gsap.from(split.chars, {
+                        opacity: 0,
+                        scale: 1.5,
+                        filter: 'blur(5px)',
+                        xPercent: () => gsap.utils.random(-50, 50),
+                        yPercent: () => gsap.utils.random(-100, 50),
+                        rotationZ: () => gsap.utils.random(-45, 45),
+                        duration: 1.5,
+                        stagger: { amount: 1.2, from: "edges" },
+                        ease: "expo.out",
+                        delay: 0.5
+                    });
+                    gsap.from(split.lines, {
+                        delay: 1.5,
+                        duration: 2,
+                        skewX: () => gsap.utils.random(-5, 5),
+                        x: () => gsap.utils.random(-10, 10),
+                        opacity: 0.8,
+                        ease: "elastic.out(1, 0.4)",
+                        stagger: 0.1
+                    });
+                }
+
+                if (subtitle) {
+                    gsap.to(subtitle, { opacity: 1, y: 0, duration: 1, delay: 1.5 });
+                    const texts = [
+                        "I am a tech enthusiast.",
+                        "I love binge watching Anime.",
+                        "Generative Ai Geek",
+                    ];
+                    let textIndex = 0;
+                    let scrambleInterval = null;
+
+                    function startScrambleSubtitle() {
+                        if (scrambleInterval) return;
+                        scrambleInterval = setInterval(() => {
+                            gsap.to(subtitle, {
+                                duration: 3,
+                                scrambleText: {
+                                    text: texts[textIndex % texts.length],
+                                    chars: "▓▒░█",
+                                    tweenLength: false,
+                                    speed: 0.4,
+                                    rightToLeft: Math.random() > 0.5
+                                }
+                            });
+                            textIndex++;
+                        }, 5000);
+                    }
+
+                    function stopScrambleSubtitle() {
+                        if (scrambleInterval) {
+                            clearInterval(scrambleInterval);
+                            scrambleInterval = null;
+                        }
+                    }
+
+                    ScrollTrigger.create({
+                        trigger: "#hero",
+                        start: "top top",
+                        end: "bottom top",
+                        onEnter: startScrambleSubtitle,
+                        onLeave: stopScrambleSubtitle,
+                        onEnterBack: startScrambleSubtitle,
+                        onLeaveBack: stopScrambleSubtitle
+                    });
+
+                    gsap.delayedCall(5, startScrambleSubtitle);
+                }
+
+                heroDecos.forEach(deco => {
+                    gsap.to(deco, {
+                        x: `random(-15, 15, 1)`,
+                        y: `random(-15, 15, 1)`,
+                        rotation: `random(-30, 30)`,
+                        duration: `random(4, 8)`,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: "sine.inOut"
+                    });
+                });
+
+                if (heroVideo) {
+                    gsap.to(heroVideo, {
+                        scale: 1,
+                        ease: "power1.inOut",
+                        scrollTrigger: {
+                            trigger: "#hero",
+                            start: "top top",
+                            end: "bottom top",
+                            scrub: 1.5,
+                        }
+                    });
+                }
+            }
+
+            function initAboutAnims() {
+                console.log("Deploying About Section Enhancements.");
+                const imageContainer = document.getElementById('about-image-container');
+                const image = document.getElementById('about-image');
+                const imageOverlay = document.getElementById('about-image-overlay');
+                const scrambleText = document.getElementById('about-scramble-text');
+                const morphBlob = document.getElementById('morphing-blob');
+                const chaosOrb = document.getElementById('chaos-orb');
+
+                if (imageContainer && image) {
+                    gsap.timeline({
+                        scrollTrigger: {
+                            trigger: imageContainer,
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: 1.2
+                        }
+                    })
+                    .fromTo(image,
+                        { scale: 1.3, filter: 'grayscale(80%) brightness(0.8)', yPercent: -15, rotationZ: -3 },
+                        { scale: 1, filter: 'grayscale(0%) brightness(1)', yPercent: 10, rotationZ: 2, ease: "none" }
+                    );
+                    gsap.set(imageOverlay.children[0], { opacity: 0, scale: 0.5 });
+                    imageContainer.addEventListener('mouseenter', () => {
+                        gsap.to(imageOverlay, { opacity: 1, duration: 0.4 });
+                        gsap.to(imageOverlay.children[0], { opacity: 1, scale: 1, delay: 0.1, duration: 0.5, ease: 'back.out(1.7)' });
+                    });
+                    imageContainer.addEventListener('mouseleave', () => {
+                        gsap.to(imageOverlay, { opacity: 0, duration: 0.4 });
+                        gsap.to(imageOverlay.children[0], { opacity: 0, scale: 0.5, duration: 0.3 });
+                    });
+                }
+
+                gsap.utils.toArray('.paragraph-reveal').forEach(p => {
+                    const split = new SplitText(p, { type: "words" });
+                    gsap.from(split.words, {
+                        scrollTrigger: { trigger: p, start: "top 85%", end: "bottom center", toggleActions: "play none none reverse", scrub: 0.5 },
+                        opacity: 0.1,
+                        stagger: 0.05,
+                        ease: "power1.inOut"
+                    });
+                });
+
+                if (scrambleText) {
+                    const exploringTopics = ["GSAP", "WAN-2.1", "HACKATHONS", "Tech Fests"];
+                    let topicIndex = 0;
+                    let scrambleInterval = null;
+
+                    function startScrambleAbout() {
+                        if (scrambleInterval) return;
+                        scrambleInterval = setInterval(() => {
+                            gsap.to(scrambleText, {
+                                duration: 1.5,
+                                scrambleText: {
+                                    text: exploringTopics[topicIndex % exploringTopics.length],
+                                    chars: "lowerCase",
+                                    speed: 0.4
+                                }
+                            });
+                            topicIndex++;
+                        }, 4000);
+                    }
+
+                    function stopScrambleAbout() {
+                        if (scrambleInterval) {
+                            clearInterval(scrambleInterval);
+                            scrambleInterval = null;
+                        }
+                    }
+
+                    ScrollTrigger.create({
+                        trigger: scrambleText,
+                        start: "top 90%",
+                        end: "bottom top",
+                        onEnter: startScrambleAbout,
+                        onLeave: stopScrambleAbout,
+                        onEnterBack: startScrambleAbout,
+                        onLeaveBack: stopScrambleAbout
+                    });
+                }
+
+                if (morphBlob && MorphSVGPlugin) {
+                    const paths = ['#blob-path-1', '#blob-path-2', '#blob-path-3'];
+                    let currentPath = 0;
+                    let morphInterval = null;
+
+                    function startMorph() {
+                        if (morphInterval) return;
+                        morphInterval = setInterval(() => {
+                            currentPath = (currentPath + 1) % paths.length;
+                            gsap.to('#blob-path-1', {
+                                duration: 2.5,
+                                morphSVG: paths[currentPath],
+                                ease: "power2.inOut"
+                            });
+                        }, 3500);
+                    }
+
+                    function stopMorph() {
+                        if (morphInterval) {
+                            clearInterval(morphInterval);
+                            morphInterval = null;
+                        }
+                    }
+
+                    ScrollTrigger.create({
+                        trigger: "#about",
+                        start: "top center",
+                        end: "bottom top",
+                        onEnter: startMorph,
+                        onLeave: stopMorph,
+                        onEnterBack: startMorph,
+                        onLeaveBack: stopMorph
+                    });
+                }
+
+                if (chaosOrb && Draggable) {
+                    Draggable.create(chaosOrb, {
+                        type: "x,y",
+                        bounds: "#about",
+                        inertia: true,
+                        edgeResistance: 0.7,
+                        onDragStart: function() { gsap.to(this.target, { scale: 1.2, duration: 0.3 }); },
+                        onDragEnd: function() { gsap.to(this.target, { scale: 1, duration: 0.5, ease: 'elastic.out(1, 0.5)' }); }
+                    });
+                }
+            }
+
+            function initProjectAnims() {
+                console.log("Initializing Project Flip Matrix.");
+                const grid = document.getElementById("project-grid");
+                const items = gsap.utils.toArray(".project-item");
+                const modal = document.getElementById("project-modal");
+                const modalContent = document.getElementById("modal-content");
+                const closeModalBtn = document.getElementById("close-modal-btn");
+
+                if (!grid || !modal || items.length === 0) return;
+
+                gsap.from(items, {
+                    scrollTrigger: { trigger: grid, start: "top 90%", toggleActions: "play none none reverse" },
+                    opacity: 0,
+                    scale: 0.5,
+                    yPercent: 50,
+                    rotationX: -45,
+                    rotationY: () => gsap.utils.random(-30, 30),
+                    filter: 'blur(10px)',
+                    duration: 1,
+                    stagger: { amount: 0.8, from: "center" },
+                    ease: "expo.out"
+                });
+
+                items.forEach(item => {
+                    const img = item.querySelector('img');
+                    gsap.set(item, { transformStyle: "preserve-3d", transformPerspective: 1000 });
+                    item.addEventListener('mousemove', (e) => {
+                        const rect = item.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const xPercent = (x / rect.width - 0.5) * 2;
+                        const yPercent = (y / rect.height - 0.5) * 2;
+                        gsap.to(item, {
+                            rotationY: xPercent * 10,
+                            rotationX: -yPercent * 8,
+                            duration: 0.5, ease: "power1.out"
+                        });
+                        if(img) {
+                            gsap.to(img, { x: xPercent * 5, y: yPercent * 5, duration: 0.5, ease: "power1.out" });
+                        }
+                    });
+                    item.addEventListener('mouseleave', () => {
+                        gsap.to(item, { rotationY: 0, rotationX: 0, duration: 0.6, ease: "elastic.out(1, 0.5)" });
+                        if(img) {
+                            gsap.to(img, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.5)" });
+                        }
+                    });
+                });
+
+                function showModal(item) {
+                    const details = item.querySelector(".project-details");
+                    if (!details) return;
+                    const detailsClone = details.cloneNode(true);
+                    detailsClone.classList.remove('hidden');
+                    modalContent.innerHTML = '';
+                    modalContent.appendChild(detailsClone);
+
+                    const state = Flip.getState([item, modal], { props: "borderRadius,boxShadow,opacity" });
+
+                    modal.classList.remove("pointer-events-none", "visibility-hidden");
+                    gsap.set(modal, { visibility: "visible" });
+                    item.style.visibility = 'hidden';
+
+                    Flip.from(state, {
+                        targets: modal.children[0],
+                        duration: 0.8, ease: "expo.inOut", scale: true, absolute: true,
+                        onEnter: elements => {
+                            gsap.fromTo(modal, { opacity: 0 }, { opacity: 1, duration: 0.5 });
+                            gsap.fromTo(elements[0], { scale: 0.9, opacity: 0.5 }, { scale: 1, opacity: 1, duration: 0.8, ease: "expo.out"});
+                            gsap.from(modalContent.children, { delay: 0.3, opacity: 0, y: 30, stagger: 0.1, duration: 0.6 });
+                            return () => {};
+                        },
+                        onStart: () => { smoother.paused(true); }
+                    });
+                }
+
+                function hideModal() {
+                    const hiddenItem = document.querySelector('.project-item[style*="visibility: hidden"]');
+                    if (!hiddenItem) return;
+
+                    const state = Flip.getState([hiddenItem, modal.children[0]], { props: "borderRadius,boxShadow,opacity" });
+
+                    Flip.from(state, {
+                        targets: modal.children[0],
+                        duration: 0.7, ease: "expo.inOut", scale: true, absolute: true,
+                        onLeave: elements => {
+                            gsap.to(modal, { opacity: 0, duration: 0.5, delay: 0.1 });
+                            return gsap.to(elements[0], { opacity: 0, scale: 0.9, duration: 0.6, ease: "expo.in" });
+                        },
+                        onComplete: () => {
+                            modal.classList.add("pointer-events-none", "visibility-hidden");
+                            gsap.set(modal, { visibility: "hidden" });
+                            hiddenItem.style.visibility = 'visible';
+                            modalContent.innerHTML = '';
+                            smoother.paused(false);
+                        }
+                    });
+                }
+                items.forEach(item => item.addEventListener('click', () => showModal(item)));
+                closeModalBtn.addEventListener('click', hideModal);
+                modal.addEventListener('click', (e) => { if (e.target === modal) hideModal(); });
+                document.addEventListener('keydown', (e) => { if (e.key === "Escape" && !modal.classList.contains('pointer-events-none')) hideModal(); });
+            }
+
+            function initSkillsAnims() {
+                console.log("Powering Up Skills Matrix.");
+                const skillItems = gsap.utils.toArray('.skill-item');
+                const skillIcons = gsap.utils.toArray('.skill-icon-wrapper');
+                const skillTitles = gsap.utils.toArray('.skill-title');
+                const skillIconBGs = gsap.utils.toArray('.skill-icon-wrapper .absolute');
+
+                gsap.from(skillItems, {
+                    scrollTrigger: { trigger: "#skills .grid", start: "top 80%", toggleActions: "play none none reverse" },
+                    opacity: 0,
+                    scale: 0.6,
+                    yPercent: 30,
+                    rotationX: -30,
+                    rotationY: () => gsap.utils.random(-20, 20),
+                    duration: 1,
+                    stagger: { amount: 0.7, from: "start", grid: "auto" },
+                    ease: "back.out(1.4)"
+                });
+
+                skillItems.forEach((item, index) => {
+                    gsap.from(skillIconBGs[index], {
+                        scrollTrigger: { trigger: item, start: "top 75%" },
+                        scale: 0,
+                        opacity: 0,
+                        duration: 0.6,
+                        ease: "power3.out",
+                        delay: index * 0.05 + 0.5
+                    });
+
+                    const svgPath = item.querySelector('.skill-svg-path');
+                    if (svgPath && DrawSVGPlugin) {
+                        gsap.set(svgPath, { strokeDasharray: "auto", strokeDashoffset: "auto" });
+                        gsap.from(svgPath, {
+                            drawSVG: 0,
+                            duration: 1.5,
+                            ease: "power2.inOut",
+                            scrollTrigger: {
+                                trigger: item,
+                                start: "top 70%",
+                                toggleActions: "play none none reverse",
+                            }
+                        });
+                    }
+
+                    const title = skillTitles[index];
+                    let originalText = title.textContent;
+                    let scrambleTween;
+                    item.addEventListener('mouseenter', () => {
+                        scrambleTween = gsap.to(title, {
+                            duration: 0.5,
+                            scrambleText: { text: title.textContent.toUpperCase() + "++", chars: "*/\\#?&", speed: 0.5 },
+                            overwrite: true
+                        });
+                    });
+                    item.addEventListener('mouseleave', () => {
+                        if (scrambleTween) scrambleTween.kill();
+                        gsap.to(title, { duration: 0.3, scrambleText: originalText });
+                    });
+                });
+            }
+
+            function initContactAnims() {
+                console.log("Establishing Secure Contact Channel...");
+                const form = document.getElementById('contact-form');
+                const inputs = gsap.utils.toArray('#contact-form .input-reveal');
+                const button = form.querySelector('button');
+                const patternRect = document.getElementById('contact-pattern-rect');
+
+                gsap.from(inputs, {
+                    scrollTrigger: { trigger: form, start: "top 80%", toggleActions: "play none none reverse" },
+                    opacity: 0,
+                    x: -50,
+                    stagger: 0.15,
+                    duration: 0.8,
+                    ease: "power3.out"
+                });
+
+                if (patternRect) {
+                    gsap.to(patternRect, {
+                        attr: { x: -100, y: -100 },
+                        repeat: -1,
+                        duration: 5,
+                        ease: "none",
+                    });
+                }
+
+                const btnText = button.querySelector('.button-text');
+                const btnHoverText = button.querySelector('.button-hover-text');
+                if(btnText && btnHoverText) {
+                    button.addEventListener('mouseenter', () => {
+                        gsap.timeline()
+                            .to(btnText, { y: -10, opacity: 0, duration: 0.2, ease:"power1.in" })
+                            .set(btnText, { display: 'none' })
+                            .set(btnHoverText, { display: 'inline', y: 10, opacity: 0 })
+                            .to(btnHoverText, { y: 0, opacity: 1, duration: 0.3, ease: 'power1.out' });
+                    });
+                    button.addEventListener('mouseleave', () => {
+                        gsap.timeline()
+                            .to(btnHoverText, { y: -10, opacity: 0, duration: 0.2, ease:"power1.in" })
+                            .set(btnHoverText, { display: 'none' })
+                            .set(btnText, { display: 'inline', y: 10, opacity: 0 })
+                            .to(btnText, { y: 0, opacity: 1, duration: 0.3, ease: 'power1.out' });
+                    });
+                }
+            }
+
+            function initFooterAnims() {
+                console.log("Activating Footer Multiverse.");
+                const footer = document.getElementById('footer');
+                const ctaText = document.getElementById('footer-cta-text');
+                const links = gsap.utils.toArray('.footer-links a');
+                const credits = gsap.utils.toArray('.footer-credits');
+                const orb = document.getElementById('footer-orb');
+
+                if (ctaText) {
+                    const textWidth = ctaText.offsetWidth / 2;
+                    gsap.to(ctaText, {
+                        x: -textWidth,
+                        duration: 30,
+                        ease: "none",
+                        repeat: -1,
+                    });
+                    gsap.from(ctaText, {
+                        scale: 0.9, opacity: 0.5,
+                        scrollTrigger: { trigger: footer, start: "top 80%", end: "top 50%", scrub: 1 }
+                    });
+                }
+
+                gsap.from(links, {
+                    scrollTrigger: { trigger: '.footer-links', start: "top 90%", toggleActions: "play none none reverse" },
+                    opacity: 0, y: 20, stagger: 0.1, ease: "power2.out"
+                });
+                links.forEach(link => {
+                    let originalText = link.textContent;
+                    let hoverText = link.dataset.text || originalText;
+                    link.addEventListener('mouseenter', () => gsap.to(link, { textContent: hoverText, duration: 0.2, ease: "none", overwrite: "auto" }));
+                    link.addEventListener('mouseleave', () => gsap.to(link, { textContent: originalText, duration: 0.2, ease: "none", overwrite: "auto" }));
+                });
+
+                gsap.from(credits, {
+                    scrollTrigger: { trigger: '.footer-credits', start: "top 95%", toggleActions: "play none none reverse" },
+                    opacity: 0, y: 15, stagger: 0.15, delay: (el) => el.dataset.delay || 0
+                });
+
+                if (orb) {
+                    gsap.to(orb, {
+                        x: "random(-30, 30, 5)",
+                        y: "random(-20, 20, 5)",
+                        scale: "random(0.8, 1.2)",
+                        duration: "random(3, 6)",
+                        repeat: -1,
+                        yoyo: true,
+                        ease: "sine.inOut"
+                    });
+                }
+            }
+
+            function initGlobalScrollTriggers() {
+                console.log("Applying Global Scroll Effects.");
+                gsap.utils.toArray('.gsap-rotate-on-scroll').forEach(elem => {
+                    gsap.to(elem, {
+                        rotation: 360,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: elem,
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: true,
+                        }
+                    });
+                });
+            }
+
+            function initMouseInteractions() {
+                console.log("Initializing Mouse Reactive Systems.");
+                const proximityTargets = gsap.utils.toArray('.skill-item');
+                proximityTargets.forEach(target => {
+                    Observer.create({
+                        target: target,
+                        type: "pointer",
+                        tolerance: 50,
+                        onHover: () => { gsap.to(target, { scale: 1.1, duration: 0.3, ease: "power2.out", overwrite: true }); },
+                        onHoverEnd: () => { gsap.to(target, { scale: 1, duration: 0.4, ease: "power2.out", overwrite: true }); },
+                    });
+                });
+            }
+
+            function initDynamicBackground() {
+                console.log("Generating Background Chaos.");
+                const container = document.getElementById('dynamic-background');
+                const gradient = document.getElementById('animated-gradient');
+
+                if (gradient) {
+                    gsap.to(gradient, {
+                        backgroundImage: `radial-gradient(circle at ${gsap.utils.random(0,100)}% ${gsap.utils.random(0,100)}%, ${tailwind.config.theme.extend.colors['chaos-primary']}/0.15, transparent 60%), radial-gradient(circle at ${gsap.utils.random(0,100)}% ${gsap.utils.random(0,100)}%, ${tailwind.config.theme.extend.colors['chaos-secondary']}/0.1, transparent 50%)`,
+                        duration: 5,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: "sine.inOut"
+                    });
+                }
+
+                const particleCount = 30;
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    const size = gsap.utils.random(2, 6);
+                    const colors = [tailwind.config.theme.extend.colors['chaos-primary'], tailwind.config.theme.extend.colors['chaos-secondary'], tailwind.config.theme.extend.colors['chaos-tertiary'], '#555'];
+                    particle.className = `absolute rounded-full pointer-events-none`;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.backgroundColor = gsap.utils.random(colors);
+                    particle.style.opacity = gsap.utils.random(0.1, 0.5);
+                    particle.style.left = `${gsap.utils.random(0, 100)}%`;
+                    particle.style.top = `${gsap.utils.random(0, 100)}%`;
+                    container.appendChild(particle);
+
+                    gsap.to(particle, {
+                        x: `random(-100, 100, true)`,
+                        y: `random(-150, 150, true)`,
+                        opacity: `random(0, 0.3)`,
+                        scale: `random(0.5, 1.5)`,
+                        duration: `random(10, 25)`,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: "sine.inOut",
+                        delay: `random(0, 5)`
+                    });
+                }
+            }
+
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
