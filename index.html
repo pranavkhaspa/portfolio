@@ -28,12 +28,17 @@
                 'spin-very-slow': 'spin 30s linear infinite',
                 'spin-medium': 'spin 10s linear infinite',
                 'float': 'float 6s ease-in-out infinite',
+                'glow': 'glow 2s ease-in-out infinite alternate',
             },
             keyframes: {
                 pulse: { '0%, 100%': { opacity: 1 }, '50%': { opacity: .6 } },
                 float: {
                 '0%, 100%': { transform: 'translateY(0px)' },
                 '50%': { transform: 'translateY(-20px)' },
+                },
+                glow: {
+                    '0%': { boxShadow: '0 0 5px rgba(255, 0, 255, 0.3)' },
+                    '100%': { boxShadow: '0 0 15px rgba(255, 0, 255, 0.7)' },
                 }
             }
         }
@@ -47,38 +52,14 @@
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/EaselPlugin.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/GSDevTools.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathHelper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MorphSVGPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Observer.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Physics2DPlugin.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/PhysicsPropsPlugin.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/PixiPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/TextPlugin.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/EasePack.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomBounce.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomWiggle.min.js"></script>
 
-    <!-- <style>
-        body { background-color: #050505; opacity: 0; transition: opacity 0.5s ease-in-out; }
-        body.loaded { opacity: 1; }
-        #preloader { display: flex; }
-        #smooth-wrapper { opacity: 0; transition: opacity 0.5s ease-in-out; }
-        #smooth-wrapper.visible { opacity: 1; }
-        @keyframes scroll-indicator { 0% { transform: translateY(0); opacity: 1; } 50% { transform: translateY(48px); opacity: 1; } 100% { transform: translateY(48px); opacity: 0; } }
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-    </style> -->
     <link rel="stylesheet" href="/output.css">
 </head>
 <body class="font-body text-chaos-white selection:bg-chaos-secondary selection:text-chaos-black">
@@ -86,6 +67,51 @@
         <div class="w-16 h-16 border-4 border-chaos-primary border-t-transparent rounded-full animate-spin"></div>
         <div id="preloader-text" class="text-lg font-heading font-semibold tracking-wider text-chaos-white">INITIATING CHAOS...</div>
     </div>
+
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-chaos-black/80 backdrop-blur-md border-b border-chaos-primary/20">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-heading font-bold text-2xl text-chaos-primary hover:text-chaos-secondary transition-colors duration-300 flex items-center space-x-2">
+                <span class="w-8 h-8 bg-gradient-radial from-chaos-primary to-chaos-secondary rounded-full animate-pulse-fast"></span>
+                <span>PRANAV KHASPA</span>
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#hero" class="nav-link text-chaos-white/80 hover:text-chaos-primary font-mono text-sm uppercase tracking-wide relative group">
+                    <span>Home</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-chaos-primary group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="#about" class="nav-link text-chaos-white/80 hover:text-chaos-primary font-mono text-sm uppercase tracking-wide relative group">
+                    <span>About</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-chaos-primary group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="#projects" class="nav-link text-chaos-white/80 hover:text-chaos-primary font-mono text-sm uppercase tracking-wide relative group">
+                    <span>Projects</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-chaos-primary group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="#skills" class="nav-link text-chaos-white/80 hover:text-chaos-primary font-mono text-sm uppercase tracking-wide relative group">
+                    <span>Skills</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-chaos-primary group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="#contact" class="nav-link text-chaos-white/80 hover:text-chaos-primary font-mono text-sm uppercase tracking-wide relative group">
+                    <span>Contact</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-chaos-primary group-hover:w-full transition-all duration-300"></span>
+                </a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-chaos-primary focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-chaos-dark border-t border-chaos-primary/20">
+            <div class="container mx-auto px-6 py-4 flex flex-col space-y-4">
+                <a href="#hero" class="nav-link text-chaos-white/80 hover:text-chaos-primary font-mono text-sm uppercase tracking-wide">Home</a>
+                <a href="#about" class="nav-link text-chaos-white/80 hover:text-chaos-primary font-mono text-sm uppercase tracking-wide">About</a>
+                <a href="#projects" class="nav-link text-chaos-white/80 hover:text-chaos-primary font-mono text-sm uppercase tracking-wide">Projects</a>
+                <a href="#skills" class="nav-link text-chaos-white/80 hover:text-chaos-primary font-mono text-sm uppercase tracking-wide">Skills</a>
+                <a href="#contact" class="nav-link text-chaos-white/80 hover:text-chaos-primary font-mono text-sm uppercase tracking-wide">Contact</a>
+            </div>
+        </div>
+    </nav>
 
     <div id="dynamic-background" class="fixed inset-0 z-[-10] overflow-hidden pointer-events-none">
         <div id="animated-gradient" class="absolute inset-0 opacity-30"></div>
@@ -141,7 +167,7 @@
                                 A Second Year Student from <span class="font-medium text-chaos-white">M.V.G.R</span> Self taught Programmer with a passion for Building <span class="font-medium text-chaos-primary italic">Products</span> That Solves  <span class="font-medium text-chaos-secondary italic">Real World Problems.</span>.
                             </p>
                             <p class="paragraph-reveal">
-                                currently learning <strong class="text-chaos-white font-medium">React</strong>,Grinding <strong class="text-chaos-white font-medium">Leetcode</strong>, and building skills <strong class="text-chaos-white font-medium"></strong><!--. The browser isn't just a rendering engine; it's a canvas for <span class="font-medium text-chaos-tertiary italic">limitless experimentation</span>. -->
+                                currently learning <strong class="text-chaos-white font-medium">React</strong>,Grinding <strong class="text-chaos-white font-medium">Leetcode</strong>, and building skills <strong class="text-chaos-white font-medium"></strong>
                             </p>
                             <p class="paragraph-reveal">
                                 Intrested In: <span id="about-scramble-text" class="text-chaos-secondary font-mono font-medium">Comfy-Ui</span>
@@ -160,7 +186,7 @@
                         <path id="blob-path-3" fill="currentColor" class="text-chaos-secondary" d="M420,293.5Q398,337,368,355Q338,373,297.5,400Q257,427,209,421Q161,415,116,389.5Q71,364,52,319Q33,274,45.5,230.5Q58,187,99,159Q140,131,187.5,118.5Q235,106,286,93.5Q337,81,377,112Q417,143,429.5,191.5Q442,240,431,290Z" style="visibility: hidden;"/>
                     </svg>
                 </div>
-                <div id="chaos-orb" class="absolute bottom-[-50px] left-[5%] w-24 h-24 rounded-full bg-gradient-radial from-chaos-primary via-chaos-secondary to-transparent z-20 cursor-grab active:cursor-grabbing flex justify-center items-center text-white text-xs font-mono font-bold shadow-xl shadow-chaos-primary/30">Move  Me</div>
+                <div id="chaos-orb" class="absolute bottom-[-50px] left-[5%] w-24 h-24 rounded-full bg-gradient-radial from-chaos-primary via-chaos-secondary to-transparent z-20 cursor-grab active:cursor-grabbing flex justify-center items-center text-white text-xs font-mono font-bold shadow-xl shadow-chaos-primary/30">Move Me</div>
             </section>
 
             <section id="projects" class="py-28 md:py-48 bg-chaos-black overflow-hidden relative">
@@ -174,86 +200,62 @@
                         Made at hackathons
                     </p>
                 </div>
-                <div id="project-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 px-6 container mx-auto relative z-10">
-                    <div class="project-item aspect-video lg:aspect-square bg-chaos-dark rounded-md overflow-hidden relative group cursor-pointer border border-chaos-primary/20 hover:border-chaos-primary/80 duration-300 shadow-lg hover:shadow-chaos-primary/30 transform transition-transform hover:-translate-y-2 gsap-project-item" data-flip-id="proj-1">
-                        <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Project 1 Preview" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
-                        <div class="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-400 bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent">
-                            <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out">AI Teaching Bot</h3>
-                            <p class="text-sm text-chaos-primary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out delay-100">Django / Firebase / HuggingFace</p>
+                <div class="gallery-wrapper relative w-full overflow-hidden">
+                    <div class="gallery flex gap-6 px-6" id="project-gallery">
+                        <div class="gallery-item w-[80vw] md:w-[60vw] lg:w-[40vw] flex-none relative group cursor-pointer" data-link="https://ai-teaching-bot.example.com">
+                            <div class="aspect-video bg-chaos-dark rounded-md overflow-hidden border border-chaos-primary/20 group-hover:border-chaos-primary/80 duration-300 shadow-lg group-hover:shadow-chaos-primary/30 transform transition-transform group-hover:-translate-y-2">
+                                <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="AI Teaching Bot" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
+                                <div class="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                                    <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300">AI Teaching Bot</h3>
+                                    <p class="text-sm text-chaos-primary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 delay-100">Django / Firebase / HuggingFace</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="project-details hidden">
-                            <h3 class="text-4xl font-heading font-bold mb-4 text-chaos-white">AI Teaching Bot: Deep Dive</h3>
-                            <video src="https://videos.pexels.com/video-files/857090/857090-hd_1920_1080_30fps.mp4" autoplay muted loop playsinline class="w-full rounded-lg mb-6 aspect-video object-cover"></video>
-                            <p class="text-lg text-chaos-white/80 mb-4">Developed an intelligent tutoring system using Django for the backend, Firebase for real-time data and authentication, and integrated multiple HuggingFace models for natural language understanding and response generation. Focused on creating adaptive learning paths.</p>
-                            <p class="text-chaos-secondary"><strong>Tech Stack:</strong> Python, Django, Firebase Firestore, Firebase Auth, HuggingFace Transformers, JavaScript, Tailwind CSS.</p>
-                            <a href="#" class="mt-6 inline-block text-chaos-primary border border-chaos-primary px-6 py-2 rounded-full hover:bg-chaos-primary hover:text-chaos-black transition-colors duration-300">Live Demo (Link)</a>
+                        <div class="gallery-item w-[80vw] md:w-[60vw] lg:w-[40vw] flex-none relative group cursor-pointer" data-link="https://gsap-portfolio-v1.example.com">
+                            <div class="aspect-video bg-chaos-dark rounded-md overflow-hidden border border-chaos-secondary/20 group-hover:border-chaos-secondary/80 duration-300 shadow-lg group-hover:shadow-chaos-secondary/30 transform transition-transform group-hover:-translate-y-2">
+                                <img src="https://images.pexels.com/photos/5775854/pexels-photo-5775854.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="GSAP Portfolio V1" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
+                                <div class="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                                    <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300">GSAP Portfolio V1</h3>
+                                    <p class="text-sm text-chaos-secondary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 delay-100">GSAP / ScrollTrigger / Tailwind</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="project-item aspect-video lg:aspect-square bg-chaos-dark rounded-md overflow-hidden relative group cursor-pointer border border-chaos-secondary/20 hover:border-chaos-secondary/80 duration-300 shadow-lg hover:shadow-chaos-secondary/30 transform transition-transform hover:-translate-y-2 gsap-project-item" data-flip-id="proj-2">
-                        <img src="https://images.pexels.com/photos/5775854/pexels-photo-5775854.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Project 2 Preview" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
-                        <div class="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-400 bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent">
-                            <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out">GSAP Portfolio V1</h3>
-                            <p class="text-sm text-chaos-secondary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out delay-100">GSAP / ScrollTrigger / Tailwind</p>
+                        <div class="gallery-item w-[80vw] md:w-[60vw] lg:w-[40vw] flex-none relative group cursor-pointer" data-link="https://kinetic-type.example.com">
+                            <div class="aspect-video bg-chaos-dark rounded-md overflow-hidden border border-chaos-primary/20 group-hover:border-chaos-primary/80 duration-300 shadow-lg group-hover:shadow-chaos-primary/30 transform transition-transform group-hover:-translate-y-2">
+                                <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Kinetic Type" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
+                                <div class="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                                    <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300">Kinetic Type</h3>
+                                    <p class="text-sm text-chaos-primary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 delay-100">GSAP / SplitText / Variable Fonts</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="project-details hidden">
-                            <h3 class="text-4xl font-heading font-bold mb-4 text-chaos-white">GSAP Portfolio V1: Motion Study</h3>
-                            <p class="text-lg text-chaos-white/80 mb-4">An earlier iteration of my personal portfolio, focusing heavily on scroll-driven animations using GSAP's ScrollTrigger plugin. Experimented with parallax effects, text reveals, and SVG animations to create an engaging narrative flow. Built entirely with Tailwind CSS for styling.</p>
-                            <p class="text-chaos-secondary"><strong>Tech Stack:</strong> HTML, CSS, JavaScript, GSAP (Core, ScrollTrigger, SplitText, DrawSVG), Tailwind CSS.</p>
-                            <a href="#" class="mt-6 inline-block text-chaos-primary border border-chaos-primary px-6 py-2 rounded-full hover:bg-chaos-primary hover:text-chaos-black transition-colors duration-300">View Code (Link)</a>
+                        <div class="gallery-item w-[80vw] md:w-[60vw] lg:w-[40vw] flex-none relative group cursor-pointer" data-link="https://data-visualizer.example.com">
+                            <div class="aspect-video bg-chaos-dark rounded-md overflow-hidden border border-chaos-secondary/20 group-hover:border-chaos-secondary/80 duration-300 shadow-lg group-hover:shadow-chaos-secondary/30 transform transition-transform group-hover:-translate-y-2">
+                                <img src="https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg" alt="Data Visualizer" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
+                                <div class="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                                    <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300">Data Visualizer</h3>
+                                    <p class="text-sm text-chaos-secondary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 delay-100">D3.js / React / API</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="project-item aspect-video lg:aspect-square bg-chaos-dark rounded-md overflow-hidden relative group cursor-pointer border border-chaos-primary/20 hover:border-chaos-primary/80 duration-300 shadow-lg hover:shadow-chaos-primary/30 transform transition-transform hover:-translate-y-2 gsap-project-item" data-flip-id="proj-3">
-                        <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Project 3 Preview" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
-                        <div class="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-400 bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent">
-                            <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out">Kinetic Type</h3>
-                            <p class="text-sm text-chaos-primary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out delay-100">GSAP / SplitText / Variable Fonts</p>
+                        <div class="gallery-item w-[80vw] md:w-[60vw] lg:w-[40vw] flex-none relative group cursor-pointer" data-link="https://web-audio-api.example.com">
+                            <div class="aspect-video bg-chaos-dark rounded-md overflow-hidden border border-chaos-primary/20 group-hover:border-chaos-primary/80 duration-300 shadow-lg group-hover:shadow-chaos-primary/30 transform transition-transform group-hover:-translate-y-2">
+                                <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg" alt="Web Audio API Fun" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
+                                <div class="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                                    <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300">Web Audio API Fun</h3>
+                                    <p class="text-sm text-chaos-primary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 delay-100">JavaScript / Web Audio</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="project-details hidden">
-                            <h3 class="text-4xl font-heading font-bold mb-4 text-chaos-white">Kinetic Typography</h3>
-                            <video src="https://videos.pexels.com/video-files/7688686/7688686-hd_1920_1080_25fps.mp4" autoplay muted loop playsinline class="w-full rounded-lg mb-6 aspect-video object-cover"></video>
-                            <p class="text-lg text-chaos-white/80 mb-4">A creative coding experiment focused on animating typography using GSAP and variable fonts. Explored techniques like character staggering, morphing text shapes (simulated), and synchronizing text animation to audio cues (conceptual). Utilized SplitText extensively.</p>
-                            <p class="text-chaos-secondary"><strong>Tech Stack:</strong> HTML, CSS, JavaScript, GSAP (Core, SplitText), Variable Fonts.</p>
-                            <a href="#" class="mt-6 inline-block text-chaos-primary border border-chaos-primary px-6 py-2 rounded-full hover:bg-chaos-primary hover:text-chaos-black transition-colors duration-300">Interactive Demo (Link)</a>
+                        <div class="gallery-item w-[80vw] md:w-[60vw] lg:w-[40vw] flex-none relative group cursor-pointer" data-link="https://serverless-functions.example.com">
+                            <div class="aspect-video bg-chaos-dark rounded-md overflow-hidden border border-chaos-secondary/20 group-hover:border-chaos-secondary/80 duration-300 shadow-lg group-hover:shadow-chaos-secondary/30 transform transition-transform group-hover:-translate-y-2">
+                                <img src="https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg" alt="Serverless Functions" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
+                                <div class="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                                    <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300">Serverless Functions</h3>
+                                    <p class="text-sm text-chaos-primary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 delay-100">AWS Lambda</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="project-item aspect-video lg:aspect-square bg-chaos-dark rounded-md overflow-hidden relative group cursor-pointer border border-chaos-secondary/20 hover:border-chaos-secondary/80 duration-300 shadow-lg hover:shadow-chaos-secondary/30 transform transition-transform hover:-translate-y-2 gsap-project-item" data-flip-id="proj-4">
-                        <img src="https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg" alt="Project 4" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
-                        <div class="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-400 bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent">
-                            <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out">Data Visualizer</h3>
-                            <p class="text-sm text-chaos-secondary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out delay-100">D3.js / React / API</p>
-                        </div>
-                        <div class="project-details hidden">
-                            <h3 class="text-4xl font-heading font-bold mb-4 text-chaos-white">Project 4 Title</h3>
-                            <p>Details...</p>
-                        </div>
-                    </div>
-                    <div class="project-item aspect-video lg:aspect-square bg-chaos-dark rounded-md overflow-hidden relative group cursor-pointer border border-chaos-primary/20 hover:border-chaos-primary/80 duration-300 shadow-lg hover:shadow-chaos-primary/30 transform transition-transform hover:-translate-y-2 gsap-project-item" data-flip-id="proj-5">
-                        <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg" alt="Project 5" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
-                        <div class="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-400 bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent">
-                            <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out">Web Audio API Fun</h3>
-                            <p class="text-sm text-chaos-primary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out delay-100">JavaScript / Web Audio</p>
-                        </div>
-                        <div class="project-details hidden">
-                            <h3 class="text-4xl font-heading font-bold mb-4 text-chaos-white">Project 5 Title</h3>
-                            <p>Details...</p>
-                        </div>
-                    </div>
-                    <div class="project-item aspect-video lg:aspect-square bg-chaos-dark rounded-md overflow-hidden relative group cursor-pointer border border-chaos-secondary/20 hover:border-chaos-secondary/80 duration-300 shadow-lg hover:shadow-chaos-secondary/30 transform transition-transform hover:-translate-y-2 gsap-project-item" data-flip-id="proj-6">
-                        <img src="https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg" alt="Project 6" class="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:filter-[brightness(0.7)]">
-                        <div class="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-400 bg-gradient-to-t from-chaos-black/90 via-chaos-black/50 to-transparent">
-                            <h3 class="text-xl md:text-2xl font-heading font-semibold text-chaos-white transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out">Serverless Functions</h3>
-                            <p class="text-sm text-chaos-primary transform translate-y-5 group-hover:translate-y-0 transition-transform duration-300 ease-out delay-100"> / AWS Lambda</p>
-                        </div>
-                        <div class="project-details hidden">
-                            <h3 class="text-4xl font-heading font-bold mb-4 text-chaos-white">Project 6 Title</h3>
-                            <p>Details...</p>
-                        </div>
-                    </div>
-                </div>
-                <div id="project-modal" class="fixed inset-0 bg-chaos-black/90 backdrop-blur-lg z-[50] flex justify-center items-center p-6 md:p-16 opacity-0 pointer-events-none visibility-hidden">
-                    <div class="bg-chaos-dark rounded-lg shadow-2xl shadow-chaos-secondary/30 w-full max-w-4xl max-h-[90vh] overflow-y-auto p-8 md:p-12 relative scale-90 transform">
-                        <div id="modal-content"></div>
-                        <button id="close-modal-btn" class="absolute top-4 right-4 text-chaos-white/50 hover:text-chaos-primary text-4xl leading-none font-bold z-10">×</button>
                     </div>
                 </div>
             </section>
@@ -380,8 +382,8 @@
             console.log("DOM Ready. System Check: ONLINE.");
 
             gsap.registerPlugin(
-                Draggable, DrawSVGPlugin, Flip, MotionPathPlugin, MorphSVGPlugin, Observer,
-                ScrambleTextPlugin, ScrollTrigger, ScrollSmoother, ScrollToPlugin, SplitText, TextPlugin
+                Draggable, MorphSVGPlugin, Observer,
+                ScrambleTextPlugin, ScrollTrigger, ScrollSmoother, SplitText, TextPlugin
             );
             gsap.defaults({ duration: 0.8, ease: "power2.out" });
 
@@ -424,6 +426,66 @@
             }
             initPreloader();
 
+            function initNavbarAnims() {
+                console.log("Initializing Navbar Systems.");
+                const navbar = document.getElementById('navbar');
+                const navLinks = gsap.utils.toArray('.nav-link');
+                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+                const mobileMenu = document.getElementById('mobile-menu');
+
+                // Navbar entrance animation
+                gsap.from(navbar, {
+                    y: -100,
+                    opacity: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                    delay: 0.5
+                });
+
+                // Nav links hover effect
+                navLinks.forEach(link => {
+                    gsap.to(link, {
+                        scrollTrigger: {
+                            trigger: "#hero",
+                            start: "top top",
+                            end: "bottom top",
+                            onEnter: () => gsap.to(link, { color: "#f0f0f0", duration: 0.3 }),
+                            onLeave: () => gsap.to(link, { color: "rgba(240, 240, 240, 0.8)", duration: 0.3 }),
+                            onEnterBack: () => gsap.to(link, { color: "#f0f0f0", duration: 0.3 }),
+                            onLeaveBack: () => gsap.to(link, { color: "rgba(240, 240, 240, 0.8)", duration: 0.3 })
+                        }
+                    });
+                });
+
+                // Mobile menu toggle
+                mobileMenuBtn.addEventListener('click', () => {
+                    const isOpen = mobileMenu.classList.contains('hidden');
+                    if (isOpen) {
+                        mobileMenu.classList.remove('hidden');
+                        gsap.fromTo(mobileMenu, 
+                            { height: 0, opacity: 0 },
+                            { height: 'auto', opacity: 1, duration: 0.5, ease: "power2.out" }
+                        );
+                        gsap.from(mobileMenu.querySelectorAll('.nav-link'), {
+                            y: 20,
+                            opacity: 0,
+                            stagger: 0.1,
+                            duration: 0.4,
+                            ease: "power2.out",
+                            delay: 0.2
+                        });
+                    } else {
+                        gsap.to(mobileMenu, {
+                            height: 0,
+                            opacity: 0,
+                            duration: 0.5,
+                            ease: "power2.in",
+                            onComplete: () => mobileMenu.classList.add('hidden')
+                        });
+                    }
+                });
+            }
+
             function initScrollDependentAnims() {
                 if (isPreloading) return;
                 console.log("Core Systems Online. Initializing ScrollSmoother & Triggers.");
@@ -431,11 +493,12 @@
                 smoother = ScrollSmoother.create({
                     wrapper: "#smooth-wrapper",
                     content: "#smooth-content",
-                    smooth: 1.6,
+                    smooth: 1.2,
                     effects: true,
-                    smoothTouch: 0.1,
+                    smoothTouch: 0.2,
                 });
 
+                initNavbarAnims();
                 initHeroAnims();
                 initAboutAnims();
                 initProjectAnims();
@@ -470,14 +533,14 @@
                         xPercent: () => gsap.utils.random(-50, 50),
                         yPercent: () => gsap.utils.random(-100, 50),
                         rotationZ: () => gsap.utils.random(-45, 45),
-                        duration: 1.5,
-                        stagger: { amount: 1.2, from: "edges" },
+                        duration: 1.2,
+                        stagger: { amount: 1, from: "edges" },
                         ease: "expo.out",
                         delay: 0.5
                     });
                     gsap.from(split.lines, {
-                        delay: 1.5,
-                        duration: 2,
+                        delay: 1.2,
+                        duration: 1.5,
                         skewX: () => gsap.utils.random(-5, 5),
                         x: () => gsap.utils.random(-10, 10),
                         opacity: 0.8,
@@ -487,7 +550,7 @@
                 }
 
                 if (subtitle) {
-                    gsap.to(subtitle, { opacity: 1, y: 0, duration: 1, delay: 1.5 });
+                    gsap.to(subtitle, { opacity: 1, y: 0, duration: 1, delay: 1.2 });
                     const texts = [
                         "I am a tech enthusiast.",
                         "I love binge watching Anime.",
@@ -688,107 +751,181 @@
             }
 
             function initProjectAnims() {
-                console.log("Initializing Project Flip Matrix.");
-                const grid = document.getElementById("project-grid");
-                const items = gsap.utils.toArray(".project-item");
-                const modal = document.getElementById("project-modal");
-                const modalContent = document.getElementById("modal-content");
-                const closeModalBtn = document.getElementById("close-modal-btn");
+                console.log("Initializing Infinite Scroll Gallery with Auto-Scroll.");
+                const gallery = document.getElementById("project-gallery");
+                const items = gsap.utils.toArray(".gallery-item");
+                if (!gallery || items.length === 0) return;
 
-                if (!grid || !modal || items.length === 0) return;
+                // Duplicate items for infinite loop
+                const originalItems = items.map(item => item.cloneNode(true));
+                originalItems.forEach(clone => gallery.appendChild(clone));
 
+                const itemWidth = items[0].offsetWidth + 24; // Width + gap
+                const totalWidth = itemWidth * items.length;
+                let currentX = 0;
+                let autoScrollTween;
+
+                // Initial animation setup
+                gsap.set(gallery, { x: 0 });
                 gsap.from(items, {
-                    scrollTrigger: { trigger: grid, start: "top 90%", toggleActions: "play none none reverse" },
+                    scrollTrigger: {
+                        trigger: gallery,
+                        start: "top 90%",
+                        toggleActions: "play none none reverse"
+                    },
                     opacity: 0,
-                    scale: 0.5,
-                    yPercent: 50,
-                    rotationX: -45,
-                    rotationY: () => gsap.utils.random(-30, 30),
-                    filter: 'blur(10px)',
-                    duration: 1,
-                    stagger: { amount: 0.8, from: "center" },
-                    ease: "expo.out"
+                    scale: 0.8,
+                    yPercent: 20,
+                    duration: 0.8,
+                    stagger: { amount: 0.5, from: "center" },
+                    ease: "power2.out"
                 });
 
-                items.forEach(item => {
-                    const img = item.querySelector('img');
-                    gsap.set(item, { transformStyle: "preserve-3d", transformPerspective: 1000 });
-                    item.addEventListener('mousemove', (e) => {
-                        const rect = item.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-                        const xPercent = (x / rect.width - 0.5) * 2;
-                        const yPercent = (y / rect.height - 0.5) * 2;
-                        gsap.to(item, {
-                            rotationY: xPercent * 10,
-                            rotationX: -yPercent * 8,
-                            duration: 0.5, ease: "power1.out"
-                        });
-                        if(img) {
-                            gsap.to(img, { x: xPercent * 5, y: yPercent * 5, duration: 0.5, ease: "power1.out" });
+                // Infinite scroll logic
+                function updateGallery() {
+                    if (currentX <= -totalWidth) {
+                        currentX += totalWidth;
+                        gsap.set(gallery, { x: currentX });
+                    }
+                    if (currentX >= 0) {
+                        currentX -= totalWidth;
+                        gsap.set(gallery, { x: currentX });
+                    }
+                }
+
+                // Auto-scroll from right to left
+                function startAutoScroll() {
+                    if (autoScrollTween) return;
+                    autoScrollTween = gsap.to(gallery, {
+                        x: `-=${totalWidth}`,
+                        duration: 19, // Slow scroll speed
+                        ease: "none",
+                        repeat: -1,
+                        onUpdate: () => {
+                            currentX = gsap.getProperty(gallery, "x");
+                            updateGallery();
                         }
+                    });
+                }
+
+                function pauseAutoScroll() {
+                    if (autoScrollTween) {
+                        autoScrollTween.pause();
+                    }
+                }
+
+                function resumeAutoScroll() {
+                    if (autoScrollTween && autoScrollTween.paused()) {
+                        autoScrollTween.resume();
+                    }
+                }
+
+                // Start auto-scroll when section is in view
+                ScrollTrigger.create({
+                    trigger: gallery,
+                    start: "top 80%",
+                    end: "bottom top",
+                    onEnter: startAutoScroll,
+                    onEnterBack: startAutoScroll,
+                    onLeave: pauseAutoScroll,
+                    onLeaveBack: pauseAutoScroll
+                });
+
+                // Smooth scroll with snapping
+                let velocity = 0;
+                let targetX = 0;
+                let snapIndex = 0;
+
+                function snapToItem(index) {
+                    snapIndex = index % items.length;
+                    targetX = -snapIndex * itemWidth;
+                    gsap.to(gallery, {
+                        x: targetX,
+                        duration: 0.6,
+                        ease: "power2.out",
+                        onUpdate: () => {
+                            currentX = gsap.getProperty(gallery, "x");
+                            updateGallery();
+                        },
+                        onComplete: resumeAutoScroll
+                    });
+                }
+
+                // Draggable for manual scrolling
+                Draggable.create(gallery, {
+                    type: "x",
+                    bounds: { minX: -totalWidth * 2, maxX: totalWidth },
+                    inertia: true,
+                    onDragStart: pauseAutoScroll,
+                    onDrag: () => {
+                        currentX = gsap.getProperty(gallery, "x");
+                        updateGallery();
+                    },
+                    onThrowUpdate: () => {
+                        currentX = gsap.getProperty(gallery, "x");
+                        updateGallery();
+                    },
+                    onThrowComplete: () => {
+                        const closestIndex = Math.round(-currentX / itemWidth);
+                        snapToItem(closestIndex);
+                    },
+                    snap: {
+                        x: value => Math.round(value / itemWidth) * itemWidth
+                    }
+                });
+
+                // ScrollTrigger for auto-scroll and snapping
+                ScrollTrigger.create({
+                    trigger: gallery,
+                    start: "top center",
+                    end: "bottom center",
+                    onUpdate: self => {
+                        velocity = self.getVelocity();
+                        if (Math.abs(velocity) < 100) { // Snap when scrolling slows
+                            const closestIndex = Math.round(-currentX / itemWidth);
+                            snapToItem(closestIndex);
+                        }
+                    }
+                });
+
+                // Click to navigate to live project and hover interactions
+                [...items, ...originalItems].forEach((item, index) => {
+                    item.addEventListener('click', () => {
+                        const link = item.dataset.link;
+                        if (link && link !== "#" && /^https?:\/\//.test(link)) {
+                            window.open(link, '_blank');
+                        } else {
+                            console.warn("Invalid or missing project link:", link);
+                        }
+                    });
+
+                    // Pause/resume auto-scroll on hover
+                    item.addEventListener('mouseenter', pauseAutoScroll);
+                    item.addEventListener('mouseleave', resumeAutoScroll);
+
+                    // Simplified hover effect for mobile
+                    gsap.set(item, { transformPerspective: 800 });
+                    item.addEventListener('mouseenter', () => {
+                        gsap.to(item, {
+                            scale: 1.05,
+                            duration: 0.3,
+                            ease: "power1.out"
+                        });
                     });
                     item.addEventListener('mouseleave', () => {
-                        gsap.to(item, { rotationY: 0, rotationX: 0, duration: 0.6, ease: "elastic.out(1, 0.5)" });
-                        if(img) {
-                            gsap.to(img, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.5)" });
-                        }
+                        gsap.to(item, {
+                            scale: 1,
+                            duration: 0.4,
+                            ease: "power1.out"
+                        });
                     });
                 });
 
-                function showModal(item) {
-                    const details = item.querySelector(".project-details");
-                    if (!details) return;
-                    const detailsClone = details.cloneNode(true);
-                    detailsClone.classList.remove('hidden');
-                    modalContent.innerHTML = '';
-                    modalContent.appendChild(detailsClone);
-
-                    const state = Flip.getState([item, modal], { props: "borderRadius,boxShadow,opacity" });
-
-                    modal.classList.remove("pointer-events-none", "visibility-hidden");
-                    gsap.set(modal, { visibility: "visible" });
-                    item.style.visibility = 'hidden';
-
-                    Flip.from(state, {
-                        targets: modal.children[0],
-                        duration: 0.8, ease: "expo.inOut", scale: true, absolute: true,
-                        onEnter: elements => {
-                            gsap.fromTo(modal, { opacity: 0 }, { opacity: 1, duration: 0.5 });
-                            gsap.fromTo(elements[0], { scale: 0.9, opacity: 0.5 }, { scale: 1, opacity: 1, duration: 0.8, ease: "expo.out"});
-                            gsap.from(modalContent.children, { delay: 0.3, opacity: 0, y: 30, stagger: 0.1, duration: 0.6 });
-                            return () => {};
-                        },
-                        onStart: () => { smoother.paused(true); }
-                    });
+                // Optimize for mobile
+                if (/Mobi|Android/i.test(navigator.userAgent)) {
+                    gsap.ticker.fps(30); // Limit frame rate on mobile
+                    smoother.smoothTouch = 0.3; // Increase touch sensitivity
                 }
-
-                function hideModal() {
-                    const hiddenItem = document.querySelector('.project-item[style*="visibility: hidden"]');
-                    if (!hiddenItem) return;
-
-                    const state = Flip.getState([hiddenItem, modal.children[0]], { props: "borderRadius,boxShadow,opacity" });
-
-                    Flip.from(state, {
-                        targets: modal.children[0],
-                        duration: 0.7, ease: "expo.inOut", scale: true, absolute: true,
-                        onLeave: elements => {
-                            gsap.to(modal, { opacity: 0, duration: 0.5, delay: 0.1 });
-                            return gsap.to(elements[0], { opacity: 0, scale: 0.9, duration: 0.6, ease: "expo.in" });
-                        },
-                        onComplete: () => {
-                            modal.classList.add("pointer-events-none", "visibility-hidden");
-                            gsap.set(modal, { visibility: "hidden" });
-                            hiddenItem.style.visibility = 'visible';
-                            modalContent.innerHTML = '';
-                            smoother.paused(false);
-                        }
-                    });
-                }
-                items.forEach(item => item.addEventListener('click', () => showModal(item)));
-                closeModalBtn.addEventListener('click', hideModal);
-                modal.addEventListener('click', (e) => { if (e.target === modal) hideModal(); });
-                document.addEventListener('keydown', (e) => { if (e.key === "Escape" && !modal.classList.contains('pointer-events-none')) hideModal(); });
             }
 
             function initSkillsAnims() {
@@ -803,10 +940,8 @@
                     opacity: 0,
                     scale: 0.6,
                     yPercent: 30,
-                    rotationX: -30,
-                    rotationY: () => gsap.utils.random(-20, 20),
-                    duration: 1,
-                    stagger: { amount: 0.7, from: "start", grid: "auto" },
+                    duration: 0.8,
+                    stagger: { amount: 0.5, from: "start", grid: "auto" },
                     ease: "back.out(1.4)"
                 });
 
@@ -819,21 +954,6 @@
                         ease: "power3.out",
                         delay: index * 0.05 + 0.5
                     });
-
-                    const svgPath = item.querySelector('.skill-svg-path');
-                    if (svgPath && DrawSVGPlugin) {
-                        gsap.set(svgPath, { strokeDasharray: "auto", strokeDashoffset: "auto" });
-                        gsap.from(svgPath, {
-                            drawSVG: 0,
-                            duration: 1.5,
-                            ease: "power2.inOut",
-                            scrollTrigger: {
-                                trigger: item,
-                                start: "top 70%",
-                                toggleActions: "play none none reverse",
-                            }
-                        });
-                    }
 
                     const title = skillTitles[index];
                     let originalText = title.textContent;
@@ -932,7 +1052,10 @@
 
                 gsap.from(credits, {
                     scrollTrigger: { trigger: '.footer-credits', start: "top 95%", toggleActions: "play none none reverse" },
-                    opacity: 0, y: 15, stagger: 0.15, delay: (el) => el.dataset.delay || 0
+                    opacity: 0, 
+                    y: 15, 
+                    stagger: 0.15,
+                    delay: (el, index) => (el && el.dataset && el.dataset.delay) ? parseFloat(el.dataset.delay) : index * 0.1
                 });
 
                 if (orb) {
@@ -993,7 +1116,7 @@
                     });
                 }
 
-                const particleCount = 30;
+                const particleCount = 20;
                 for (let i = 0; i < particleCount; i++) {
                     const particle = document.createElement('div');
                     const size = gsap.utils.random(2, 6);
